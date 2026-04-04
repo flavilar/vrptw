@@ -1,24 +1,3 @@
-import numpy as np
-
-
-class Node:
-    """Solomon benchmark customer node."""
-    def __init__(self, id, x, y, demand, ready_time, due_date, service_time):
-        self.id = id
-        self.x = x
-        self.y = y
-        self.demand = demand
-        self.ready_time = ready_time
-        self.due_date = due_date
-        self.service_time = service_time
-
-    def __index__(self):
-        return self.id
-
-    def __repr__(self):
-        return f"Node({self.id}, ({self.x},{self.y}), d={self.demand}, tw=[{self.ready_time},{self.due_date}])"
-
-
 class Route:
     def __init__(self, instance, dist_matrix):
         self.capacity = instance.capacity

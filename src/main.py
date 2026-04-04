@@ -1,20 +1,27 @@
 import sys
-import os
+from pathlib import Path
+
+# Get repo root (one level above src/)
+root = Path(__file__).resolve().parent.parent
 
 # Add vrptw root to path so 'src' is importable as a package
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, str(root))
 
 import numpy as np
 from src.parser import read_solomon_instance
 from src.solvers import GreedySolver
-from src.local_search.two_opt import TwoOptLocalSearch
+from src.local_search import TwoOptLocalSearch
+
 
 
 def main():
     print("VRPTW environment ready")
     print("NumPy version:", np.__version__)
 
-    instance = read_solomon_instance("data/benchmarks/solomon-100/r102.txt")
+    # Build your path relative to repo root
+    data_path = root / "data" / "benchmarks" / "solomon-100" / "r102.txt"
+
+    instance = read_solomon_instance(data_path)
     print(instance)
 
     # Swap in any Solver implementation here

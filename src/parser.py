@@ -47,7 +47,7 @@ def read_solomon_instance(filepath):
     Parses a standard Solomon VRPTW text file.
 
     Args:
-        filepath (str): Path to the instance file.
+        filepath (Path): Path to the instance file.
 
     Returns:
         SolomonInstance: Object containing instance data.
