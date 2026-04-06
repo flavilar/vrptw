@@ -67,13 +67,26 @@ vrptw/
 ├── data/
 │   └── benchmarks/solomon-100/   # Solomon benchmark files
 ├── src/
-│   ├── main.py                   # Entry point
+│   ├── main.py                   # Entry point (wires Solver + LocalSearch)
 │   ├── parser.py                 # Solomon instance parser
-│   ├── solver.py                 # GreedySolver (Phase 1 baseline)
-│   └── utils.py                  # Distance matrix calculation
-├── environment.yml               # Conda environment spec
+│   ├── route.py                   # Node & Route data classes
+│   ├── utils.py                  # Distance matrix calculation
+│   ├── solvers/
+│   │   ├── __init__.py
+│   │   ├── base.py                # Abstract Solver base class
+│   │   └── greedy.py              # GreedySolver implementation
+│   ├── local_search/
+│   │   ├── __init__.py
+│   │   ├── base.py                # Abstract LocalSearch base class
+│   │   └── two_opt.py             # TwoOptLocalSearch (time windows enforced)
+│   └── evolution.py               # Upper-level EA / lower-level bridge (in progress)
+├── tests/
+│   └── test.py
+├── environment.yml               # Conda/micromamba environment spec
 └── README.md
 ```
+
+**Swappable interface**: `Solver` (`solve() → List[Route]`) and `LocalSearch` (`optimize(route)`) are pluggable — swap implementations in `main.py` to change algorithms without touching the rest of the codebase.
 
 ---
 
